@@ -1,0 +1,8 @@
+torch
+torchvision
+pillow
+rfdetr
+supervision
+fastapi
+uvicorn[standard]
+python-multipart
