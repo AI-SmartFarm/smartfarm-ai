@@ -1,0 +1,253 @@
+{
+  "_disclaimer": "일반적인 방제 원칙 정리 자료입니다. 구체적인 농약 품목·용량·살포시기는 반드시 농촌진흥청 농사로(nongsaro.go.kr) 등록약제 정보 또는 지역 농업기술센터/전문가 확인 후 사용하세요. 실제 서비스 배포 전 농업 전문가 검수를 권장합니다.",
+  "_code_mapping": "질병 코드→병명 매핑은 AI-Hub 데이터셋 소개 페이지의 병명 나열 순서(가지 1,2 / 고추 3,4 / 단호박 5,6 / 딸기 7,8 / 상추 9,10 / 수박 11,12 / 애호박 13 / 쥬키니 14 / 오이 15 / 참외 16,17 / 토마토 18,19 / 포도 20)로 번호를 매긴 추정입니다. 공식 코드표는 확인하지 못했습니다. 근거: 데이터에 존재하는 9개 코드(3,4,7,8,9,10,15,18,19)가 모두 이 순서와 일치, 고추 4번 이미지 수(823장x11=9,053)가 공식 '고추점무늬병' 수량과 정확히 일치, 병해 이미지를 직접 확인.",
+  "_evidence_levels": "high=출처 페이지 본문을 직접 읽어 확인 / medium=검색 결과 요약 수준 또는 작물이 특정되지 않은 일반 문서 / low=공식 자료 미확인. 방제 항목이 비어 있으면 확인된 공식 지침이 없다는 뜻입니다.",
+  "3": {
+    "code": 3,
+    "crop": "pepper",
+    "name_kr": "고추마일드모틀바이러스(고추약한모틀바이러스)",
+    "name_en": "Pepper mild mottle virus (PMMoV)",
+    "cause": {
+      "type": "바이러스 (곤충 매개가 아닌 접촉·토양·종자 전염)",
+      "pathogen": "Pepper mild mottle virus"
+    },
+    "symptoms": [
+      "잎에 모자이크(얼룩덜룩한 무늬) 증상"
+    ],
+    "favorable_conditions": "확인된 자료 없음",
+    "prevention_principles": [
+      "감염된 포기는 조기에 제거",
+      "농작업 도구 소독 (즙액 접촉으로 전염됨)",
+      "토양 소독 (토양으로도 전염됨; 방법은 농사로 등록 기준 확인)",
+      "바이러스병은 치료 약제가 없으므로 예방이 중요"
+    ],
+    "evidence_level": "medium",
+    "note": "증상·전염경로·예방 3항목은 농사로 페이지 본문에서 확인했으나 자료 분량이 짧습니다. 열매 증상 등 추가 정보는 확인하지 못했습니다.",
+    "sources": [
+      "농사로 - 고추 5종 바이러스병 감염증상 및 예방방법 http://www.nongsaro.go.kr/portal/ps/psb/psbb/farmUseTechDtl.ps?menuId=PS00072&farmPrcuseSeqNo=100000158970&totalSearchYn=Y",
+      "농사로 - 고추 주요 바이러스병 발생, 방제 해야 https://www.nongsaro.go.kr/portal/ps/psv/psvr/psvre/curationDtl.ps?menuId=PS03352&srchCurationNo=2072"
+    ]
+  },
+  "4": {
+    "code": 4,
+    "crop": "pepper",
+    "name_kr": "고추점무늬병(고추갈색점무늬병)",
+    "name_en": "Pepper Cercospora leaf spot",
+    "cause": {
+      "type": "진균(곰팡이)",
+      "pathogen": "Cercospora capsici (추정)"
+    },
+    "symptoms": [
+      "잎에 갈색의 작은 점이 생겨 커지며, 중심부는 회백색·가장자리는 갈색인 둥근 겹무늬가 됨",
+      "병반과 건전 부위의 경계가 뚜렷함",
+      "잎 반점으로 초세가 약해지고, 과실 꼭지에 생기면 상품성이 떨어짐"
+    ],
+    "favorable_conditions": "하우스 풋고추에서 심하게 발생하는 것으로 알려져 있음 (병원균 균사 생장 적온 약 25도)",
+    "prevention_principles": [],
+    "evidence_level": "low",
+    "note": "공식(농촌진흥청) 병해충 도감 페이지를 열람하지 못했습니다. 병원체는 병징 설명과 학술 자료 제목을 근거로 한 추정이며, 세균성 점무늬병과의 구분은 확인하지 못했습니다. 확인된 방제 지침이 없어 방제 항목을 비워 두었습니다. 농사로 병해충 도감 또는 지역 농업기술센터에 확인이 필요합니다.",
+    "sources": [
+      "KCI - 고추 갈색점무늬병원균(Cercospora capsici)의 배양특성과 다량 포자형성법 https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001006564"
+    ]
+  },
+  "7": {
+    "code": 7,
+    "crop": "strawberry",
+    "name_kr": "딸기잿빛곰팡이병",
+    "name_en": "Strawberry gray mold",
+    "cause": {
+      "type": "진균(곰팡이)",
+      "pathogen": "Botrytis cinerea (일반 병리학 지식; 출처 페이지에서 직접 확인하지 못함)"
+    },
+    "symptoms": [
+      "과실, 꽃받침, 과경, 잎, 엽병 등 지상부에 발생",
+      "특히 어린 과실에 침입하면 갈변 또는 흑갈변하며 부패하고 잿빛 곰팡이가 생김"
+    ],
+    "favorable_conditions": "온실에서 저온·다습한 환경",
+    "prevention_principles": [
+      "하우스 내 적정 환기로 통풍을 좋게 하고, 물주기로 과습이 되지 않게 관리",
+      "고사엽, 발병엽, 발병한 열매는 빨리 제거하여 깊이 매몰",
+      "혹한기 보온 관리 철저 (냉해를 받으면 발병이 많아짐)",
+      "약제를 쓸 경우 동일 계통 약제를 연용하지 말고 다른 계통과 번갈아 사용 (품목은 농사로 확인)",
+      "꿀벌에 의해 전염될 수 있으므로 하우스에 벌을 넣기 전에 방제"
+    ],
+    "evidence_level": "medium",
+    "note": "농사로(ASTIS) 현장기술상담 답변의 검색 결과 요약을 근거로 했으며 본문 페이지를 직접 열람하지는 못했습니다.",
+    "sources": [
+      "농사로 - 딸기 잿빛곰팡이병 발병 원인과 방제 등에 관한 문의 http://www.nongsaro.go.kr/portal/ps/psz/psza/contentSub.ps?menuId=PS00078&cntntsNo=251183&totalSearchYn=Y"
+    ]
+  },
+  "8": {
+    "code": 8,
+    "crop": "strawberry",
+    "name_kr": "딸기흰가루병",
+    "name_en": "Strawberry powdery mildew",
+    "cause": {
+      "type": "진균(곰팡이)",
+      "pathogen": "Podosphaera aphanis (일반 병리학 지식; 출처 페이지에서 직접 확인하지 못함)"
+    },
+    "symptoms": [
+      "잎 앞뒷면과 과실, 과병에 흰가루를 뿌려 놓은 것 같은 증상",
+      "어린 과실은 비대가 억제되고 딱딱해지며, 착과기 과실에 발생하면 상품가치가 떨어짐"
+    ],
+    "favorable_conditions": "봄·가을 시설재배에서 많이 발생하고 여름에는 잘 발생하지 않음. 밤낮 온도차가 크거나 통풍이 안 되는 곳에서 발병하기 쉬움. 발병 적온 17~25도이며 습도 범위가 넓어 건조한 곳에서도 피해가 큼",
+    "prevention_principles": [
+      "발병이 심한 지역은 저항성 품종 재배",
+      "병든 잔사물은 일찍 제거하여 전염원 제거, 수확 후 포장 관리",
+      "하우스 내 공기순환팬·강제환풍팬을 설치해 온·습도 환경 개선 (흰가루병에서 60% 이상 방제 효과가 보고됨)"
+    ],
+    "evidence_level": "medium",
+    "note": "농촌진흥청 웹진·농사로 검색 결과 요약을 근거로 했으며 본문 페이지를 직접 열람하지는 못했습니다.",
+    "sources": [
+      "농촌진흥청 - 시작이 반이다, 미리 준비하는 딸기 병해충 예방법 https://www.rda.go.kr/webzine/2020/02/sub3-4.html",
+      "농사로 - 흰가루병 (Powdery mildew) https://www.nongsaro.go.kr/portal/ps/pss/pssa/sicknsSearchDtl.ps?menuId=PS00202&sKidofcomdtyTabCode=IC&sKidofcomdtyCode=IC051611&hlsctCode=&sicknsCode=D00002429&nnmyInsectCode="
+    ]
+  },
+  "9": {
+    "code": 9,
+    "crop": "lettuce",
+    "name_kr": "상추균핵병",
+    "name_en": "Lettuce Sclerotinia rot (white mold)",
+    "cause": {
+      "type": "진균(곰팡이), 토양 전염",
+      "pathogen": "Sclerotinia spp."
+    },
+    "symptoms": [
+      "처음에는 잎 가장자리가 시들고, 포기 전체가 누렇게 되며 잎이 쓰러짐",
+      "밑동이 담갈색으로 변해 썩으며 흰 균사가 생김",
+      "토양에 닿은 아랫잎에 쥐똥 모양의 검은 균핵이 생김",
+      "진행이 빨라 약 2일 만에 포기가 썩기도 함"
+    ],
+    "favorable_conditions": "저온성 토양 전염병으로, 습도가 높고 기온이 15~25도로 서늘한 1~3월에 발생이 심함",
+    "prevention_principles": [
+      "비기주 작물과 돌려짓기",
+      "깊이갈이로 균핵을 땅속 깊이 묻기",
+      "멀칭으로 포기가 토양과 닿는 부위 줄이기",
+      "시설 내 적절한 환기로 과습 방지",
+      "병든 포기는 주변 토양과 함께 조기에 제거하여 깊이 매몰",
+      "가능한 포장에서는 담수 처리로 균핵을 분해",
+      "등록약제는 발병 초기에 표시 기준에 맞춰 사용 (품목은 농사로 확인)"
+    ],
+    "evidence_level": "high",
+    "note": "농사로 '상추 주요 병해 발생 전 예방적 방제가 중요'(2026-01-26) 본문을 세종시 게시본에서 직접 읽어 확인했습니다.",
+    "sources": [
+      "세종시 게시(농사로 자료) - 상추 주요 병해 발생 전 예방적 방제가 중요 https://sejong.go.kr/bbs/R3168/view.do?cmsNoStr=&nttId=B000000147632Ch9zX1n",
+      "농사로 - 상추 주요 병해 발생 전 예방적 방제가 중요 https://nongsaro.go.kr/portal/ps/psv/psvr/psvre/curationDtl.ps?menuId=PS03352&srchCurationNo=2183"
+    ]
+  },
+  "10": {
+    "code": 10,
+    "crop": "lettuce",
+    "name_kr": "상추노균병",
+    "name_en": "Lettuce downy mildew",
+    "cause": {
+      "type": "난균류(곰팡이류 병원체)",
+      "pathogen": "Bremia lactucae (일반 병리학 지식; 출처 본문에서 학명은 확인하지 못함)"
+    },
+    "symptoms": [
+      "초기에 잎 앞면에 황색 반점이 생기고, 잎 뒷면에 회색 곰팡이 포자가 생김",
+      "처음에는 잎맥을 따라 나타나다가 잎 전체로 퍼지며 누렇게 변함",
+      "말기에는 잎 끝부터 갈변·부패하고 포기가 죽음"
+    ],
+    "favorable_conditions": "저온다습한 환경에서 발생하기 쉬우며, 상대습도가 높을수록 감염과 포자 형성이 잘 됨",
+    "prevention_principles": [
+      "병든 잎은 조기에 제거하여 병원균 밀도 낮추기",
+      "발생이 심한 포장은 상추 외 작물과 돌려짓기",
+      "관수 시 잎이 젖지 않도록 주의",
+      "등록약제는 발병 초기에 표시 기준에 맞춰 사용 (품목은 농사로 확인)"
+    ],
+    "evidence_level": "high",
+    "note": "농사로 상추 병해 안내문 본문을 직접 확인했습니다. 발병 적정 온도 수치는 상추 전용 출처를 확인하지 못해 기재하지 않았습니다(오이 노균병 수치와 혼동 주의).",
+    "sources": [
+      "세종시 게시(농사로 자료) - 상추 주요 병해 발생 전 예방적 방제가 중요 https://sejong.go.kr/bbs/R3168/view.do?cmsNoStr=&nttId=B000000147632Ch9zX1n",
+      "농사로 - 상추 주요 병해 발생 전 예방적 방제가 중요 https://nongsaro.go.kr/portal/ps/psv/psvr/psvre/curationDtl.ps?menuId=PS03352&srchCurationNo=2183"
+    ]
+  },
+  "15": {
+    "code": 15,
+    "crop": "cucumber",
+    "name_kr": "오이모자이크바이러스",
+    "name_en": "Cucumber mosaic virus (CMV)",
+    "cause": {
+      "type": "바이러스 (진딧물 매개 전염)",
+      "pathogen": "Cucumber mosaic virus",
+      "vector": "진딧물 (80종 이상이 비영속적으로 전염시킨다고 보고됨)"
+    },
+    "symptoms": [
+      "황화되고 요철이 있는 모자이크 증상",
+      "새로 나온 잎이 좁아지고 위축·기형이 되기도 함"
+    ],
+    "favorable_conditions": "기주 범위가 넓어 전염원이 어느 포장에나 있을 수 있고, 진딧물을 통해 쉽게 전염됨",
+    "prevention_principles": [
+      "감염된 포기는 발견 즉시 제거",
+      "전염을 옮기는 진딧물을 방제 (육묘상에는 방충망을 설치해 유입 차단)",
+      "농작업 도구 소독",
+      "동일 작물 연작을 피하고 돌려짓기",
+      "저항성 품종 활용",
+      "포장 주변 잡초와 중간 기주 제거"
+    ],
+    "evidence_level": "medium",
+    "note": "농사로 모자이크병 페이지는 오이 전용이 아니라 여러 작물을 함께 다루는 문서이며, 오이 전용 페이지는 열람하지 못했습니다. 코드 15→오이모자이크바이러스 매핑은 순서 규칙과 이미지 수(약 3,952장 vs 공식 4,411장) 근거이고 병해 이미지의 육안 증상이 뚜렷하지 않아 확신도가 낮은 편입니다.",
+    "sources": [
+      "농사로 - 모자이크병 (Mosaic) https://nongsaro.go.kr/portal/ps/pss/pssa/sicknsSearchDtl.ps?hlsctCode=&menuId=PS00202&nnmyInsectCode=&sKidofcomdtyCode=VC011205&sKidofcomdtyTabCode=VC&sicknsCode=D00000189",
+      "농사로 - 오이모자이크바이러스(오이) https://www.nongsaro.go.kr/portal/ps/psb/psbk/kidofcomdtyDtl.mo?menuId=PS00067&kidofcomdtyNo=27902"
+    ]
+  },
+  "18": {
+    "code": 18,
+    "crop": "tomato",
+    "name_kr": "토마토잎곰팡이병",
+    "name_en": "Tomato Leaf Mold",
+    "cause": {
+      "type": "진균(곰팡이)",
+      "pathogen": "Cladosporium fulvum (Passalora fulva)"
+    },
+    "symptoms": [
+      "잎 앞면에 옅은 황색 반점",
+      "잎 뒷면에 회갈색 곰팡이가 빽빽하게 발생해 벨벳처럼 보임",
+      "식물체 아래쪽 잎에서 시작해 위쪽 잎으로 진행",
+      "심하면 병든 부위가 누렇게 변하고 말라 죽음"
+    ],
+    "favorable_conditions": "시설 내부 온도 23~28°C, 다습한 환경에서 발생하기 쉬움 (주로 초여름 이전)",
+    "prevention_principles": [
+      "병든 잎은 조기에 제거하여 소각 또는 매몰 처리",
+      "밀식을 피하고 잎이 과도하게 무성해지지 않도록 관리",
+      "환기를 철저히 하여 시설 내 과습 방지",
+      "등록약제를 이용한 방제 (품목은 농사로 등록약제 정보 확인)"
+    ],
+    "sources": [
+      "농사로(농촌진흥청) - 토마토 시설재배 곰팡이병 발생초기 방제 https://www.nongsaro.go.kr/portal/ps/psv/psvr/psvre/curationDtl.ps?menuId=PS03352&srchCurationNo=2131",
+      "농민신문 - 시설 토마토 곰팡이병 원인과 방제법 https://www.nongmin.com/article/20160322045674"
+    ]
+  },
+  "19": {
+    "code": 19,
+    "crop": "tomato",
+    "name_kr": "토마토황화잎말이바이러스(TYLCV, 토마토황화잎말림바이러스)",
+    "name_en": "Tomato Yellow Leaf Curl Virus",
+    "cause": {
+      "type": "바이러스 (매개충 전염)",
+      "pathogen": "Tomato Yellow Leaf Curl Virus",
+      "vector": "담배가루이 (Bemisia tabaci) — 온실가루이와 혼동 주의, TYLCV를 옮기는 것은 담배가루이"
+    },
+    "symptoms": [
+      "새로 나오는 잎이 작아짐",
+      "잎이 노랗게 변하며 위쪽으로 말림",
+      "생육이 위축되고 열매 달림이 나빠짐",
+      "수량 및 상품성 저하"
+    ],
+    "favorable_conditions": "시설 내 온도가 28~30°C 이상으로 오르는 6~9월, 담배가루이의 알→성충 발육기간이 2주 이내로 단축되며 밀도가 폭발적으로 증가할 수 있음",
+    "prevention_principles": [
+      "잎말림·황화·생육위축 등 의심 증상을 수시로 관찰",
+      "감염 의심 개체는 발견 즉시 제거",
+      "주변 잡초 및 방치된 토마토·고추 등 기주식물 정리(바이러스 저장고 제거)",
+      "담배가루이 발생 초기, 밀도가 낮을 때 등록약제로 방제하여 주변 확산 차단",
+      "매개충(담배가루이) 방제가 핵심 — 바이러스 자체를 직접 치료하는 약제는 없음"
+    ],
+    "sources": [
+      "농촌진흥청 보도자료 - 토마토 잎 노랗게 말리면 '토마토황화잎말림바이러스' 의심 https://rda.go.kr/board/board.do?boardId=farmprmninfo&dataNo=100000812021",
+      "농사로 - 토마토황화잎말림바이러스(TYLCV) 발생 억제를 위한 담배가루이 방제시기 https://www.nongsaro.go.kr/portal/ps/psb/psbb/farmUseTechDtl.mo?menuId=PS00072&farmPrcuseSeqNo=11737",
+      "농업인신문 - 토마토 바이러스·담배가루이 집중 방제 당부 https://www.nongupin.co.kr/news/articleView.html?idxno=207637"
+    ]
+  }
+}

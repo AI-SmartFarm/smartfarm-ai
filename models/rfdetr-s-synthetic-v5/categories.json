@@ -1,0 +1,58 @@
+{
+  "2_0": {
+    "id": 1,
+    "name": "pepper_normal"
+  },
+  "2_3": {
+    "id": 2,
+    "name": "pepper_disease3"
+  },
+  "2_4": {
+    "id": 3,
+    "name": "pepper_disease4"
+  },
+  "4_0": {
+    "id": 4,
+    "name": "strawberry_normal"
+  },
+  "4_7": {
+    "id": 5,
+    "name": "strawberry_disease7"
+  },
+  "4_8": {
+    "id": 6,
+    "name": "strawberry_disease8"
+  },
+  "5_0": {
+    "id": 7,
+    "name": "lettuce_normal"
+  },
+  "5_9": {
+    "id": 8,
+    "name": "lettuce_disease9"
+  },
+  "5_10": {
+    "id": 9,
+    "name": "lettuce_disease10"
+  },
+  "8_0": {
+    "id": 10,
+    "name": "cucumber_normal"
+  },
+  "8_15": {
+    "id": 11,
+    "name": "cucumber_disease15"
+  },
+  "11_0": {
+    "id": 12,
+    "name": "tomato_normal"
+  },
+  "11_18": {
+    "id": 13,
+    "name": "tomato_disease18"
+  },
+  "11_19": {
+    "id": 14,
+    "name": "tomato_disease19"
+  }
+}
