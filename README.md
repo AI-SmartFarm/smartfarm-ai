@@ -11,6 +11,13 @@ GrowCare AI 모델 학습·추론 (Python)
 - **데이터셋 계보**: AIHub "071.시설 작물 질병 진단" → plant-disjoint/생육단계 계층화 분할 → 배경 스왑/모자이크 합성 증강으로 파인튜닝
 - **아직 검증되지 않은 부분**: 실제 스마트팜 카메라 영상으로는 테스트되지 않음 (AIHub 근접 촬영 사진 도메인에서만 측정된 수치)
 
+## 중증도 판정 모델
+
+- **모델**: 질병별 ResNet18 분류기 9개 (`models/severity-v2/model_{질병코드}.pt`, 각 약 45MB, Git LFS) — 탐지된 병반을 잘라 초기/중기/말기 판정
+- **정확도**: 미확인 식물 기준 질병별 47~84%, 가중 평균 69.4% (`models/severity-v2/_summary.json`)
+- 검증 정확도 0.6 미만인 질병(현재 고추점무늬병, 코드 4)은 응답에 `low_confidence: true`로 표시 — 앱에서는 참고용으로만 보여줄 것
+- 모델 파일이 없는 질병은 중증도만 생략되고 진단은 그대로 진행
+
 ## 사용법
 
 ```bash
@@ -24,5 +31,6 @@ python scripts/full_pipeline.py --image path/to/photo.jpg --crop tomato
 ## 디렉터리 구조
 
 - `models/rfdetr-s-synthetic-v5/` — 탐지 모델 체크포인트 + 클래스 매핑(`categories.json`)
+- `models/severity-v2/` — 질병별 중증도 모델 9개 + 검증 결과(`_summary.json`)
 - `scripts/` — 학습(`train_rfdetr.py`), 단독 추론(`infer_rfdetr.py`), 전체 파이프라인(`full_pipeline.py`)
 - `data/disease_knowledge.json` — 질병별 원인/증상/예방·대응 지식베이스 (9개 클래스 전체 수록)

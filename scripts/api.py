@@ -21,7 +21,7 @@ pipeline = DiagnosisPipeline(
     detector_path=os.environ.get("DETECTOR_PATH", "models/rfdetr-s-synthetic-v5/last_ema.pth"),
     categories_path=os.environ.get("CATEGORIES_PATH", "models/rfdetr-s-synthetic-v5/categories.json"),
     knowledge_path=os.environ.get("KNOWLEDGE_PATH", "data/disease_knowledge.json"),
-    severity_model_path=os.environ.get("SEVERITY_MODEL_PATH"),
+    severity_dir=os.environ.get("SEVERITY_DIR", "models/severity-v2"),
     resolution=int(os.environ.get("DETECTOR_RESOLUTION", "640")),
 )
 

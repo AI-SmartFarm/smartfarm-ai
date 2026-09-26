@@ -1,10 +1,11 @@
 """Core disease-diagnosis pipeline, shared by the CLI (full_pipeline.py) and the HTTP API (api.py):
   1. RF-DETR-Small detects & classifies the lesion (5 crops, 14 classes)
   2. Predictions are restricted to the crop the farm actually grows
-  3. For tomato diseases, the box is cropped and graded by the severity classifier
+  3. Each disease box is cropped and graded early/mid/late by that disease's own severity classifier
   4. Cause/symptoms/prevention principles come from the static knowledge base
 """
 import json
+from pathlib import Path
 
 import torch
 from PIL import Image
@@ -14,9 +15,9 @@ from torchvision.ops import batched_nms
 from rfdetr import RFDETRSmall
 
 CROPS = ["pepper", "strawberry", "lettuce", "cucumber", "tomato"]
-# the severity classifier was trained on tomato disease18/19 crops only
-SEVERITY_DISEASES = {18, 19}
 SEVERITY_LABEL = {1: "초기", 2: "중기", 3: "말기"}
+# severity calls from a model below this valid accuracy are flagged so the app can show them as advisory only
+SEVERITY_LOW_CONFIDENCE_THRESHOLD = 0.6
 
 
 def deduplicate(dets, iou_threshold=0.5):
@@ -62,24 +63,37 @@ def detect(detector, image, threshold, tiles):
     return [boxes[k] for k in keep], [cids[k] for k in keep], [confs[k] for k in keep]
 
 
-def load_severity_model(path, device):
-    if path is None:
-        return None, None
-    ckpt = torch.load(path, map_location=device)
-    model = models.resnet18(weights=None)
-    model.fc = torch.nn.Linear(model.fc.in_features, len(ckpt["classes"]))
-    model.load_state_dict(ckpt["model_state"])
-    model.to(device).eval()
-    return model, ckpt["classes"]
+def load_severity_models(severity_dir, device):
+    """One ResNet18 per disease code (model_{code}.pt, 3 classes each). A single 27-way model across all
+    9 diseases plateaued at 63.9% valid acc; per-disease models reach 69.4% weighted. Returns
+    {code: (model, classes, valid_accuracy)}; diseases without a model file are simply not graded."""
+    if severity_dir is None or not Path(severity_dir).is_dir():
+        return {}
+    summary_path = Path(severity_dir) / "_summary.json"
+    accuracy = {}
+    if summary_path.exists():
+        with open(summary_path, encoding="utf-8") as f:
+            accuracy = {row["disease"]: row["best_acc"] for row in json.load(f)}
+
+    loaded = {}
+    for path in sorted(Path(severity_dir).glob("model_*.pt")):
+        code = int(path.stem.split("_")[1])
+        ckpt = torch.load(path, map_location=device)
+        model = models.resnet18(weights=None)
+        model.fc = torch.nn.Linear(model.fc.in_features, len(ckpt["classes"]))
+        model.load_state_dict(ckpt["model_state"])
+        model.to(device).eval()
+        loaded[code] = (model, ckpt["classes"], accuracy.get(code))
+    return loaded
 
 
 class DiagnosisPipeline:
-    """Loads the detector, optional severity classifier, and knowledge base once, then serves diagnose() calls.
+    """Loads the detector, per-disease severity classifiers, and knowledge base once, then serves diagnose() calls.
     Instantiate a single instance and reuse it (CLI: one call; API: one instance for the process lifetime) —
     RF-DETR weight loading takes several seconds and should not happen per-request."""
 
     def __init__(self, detector_path, categories_path, knowledge_path,
-                 severity_model_path=None, resolution=640):
+                 severity_dir=None, resolution=640):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         with open(knowledge_path, encoding="utf-8") as f:
@@ -90,7 +104,7 @@ class DiagnosisPipeline:
         self.class_names = {v["id"] - 1: v["name"] for v in categories.values()}
 
         self.detector = RFDETRSmall(pretrain_weights=detector_path, resolution=resolution)
-        self.severity_model, self.severity_classes = load_severity_model(severity_model_path, self.device)
+        self.severity_models = load_severity_models(severity_dir, self.device)
         self.severity_tf = transforms.Compose([
             transforms.Resize((224, 224)),
             transforms.ToTensor(),
@@ -115,22 +129,25 @@ class DiagnosisPipeline:
         for entry in deduplicate(candidates):
             cls_name = entry["class"]
             if not cls_name.endswith("_normal"):
-                code = cls_name.rsplit("_disease", 1)[1]
-                if self.severity_model is not None and int(code) in SEVERITY_DISEASES:
+                code = int(cls_name.rsplit("_disease", 1)[1])
+                if code in self.severity_models:
+                    severity_model, severity_classes, model_acc = self.severity_models[code]
                     x0, y0, x1, y1 = [int(v) for v in entry["bbox"]]
                     patch = image.crop((x0, y0, x1, y1))
                     inp = self.severity_tf(patch).unsqueeze(0).to(self.device)
                     with torch.no_grad():
-                        probs = torch.softmax(self.severity_model(inp), dim=1)[0]
+                        probs = torch.softmax(severity_model(inp), dim=1)[0]
                         pred_idx = int(probs.argmax())
-                    risk_code = int(self.severity_classes[pred_idx].split("_")[1])  # e.g. "18_2" -> 2
+                    risk_code = int(severity_classes[pred_idx].split("_")[1])  # e.g. "18_2" -> 2
                     entry["severity"] = {
                         "level": SEVERITY_LABEL[risk_code],
                         "risk_code": risk_code,
                         "confidence": float(probs[pred_idx]),
+                        "model_valid_accuracy": model_acc,
+                        "low_confidence": model_acc is not None and model_acc < SEVERITY_LOW_CONFIDENCE_THRESHOLD,
                     }
 
-                info = self.knowledge.get(code)
+                info = self.knowledge.get(str(code))
                 if info:
                     entry["diagnosis"] = {
                         "name_kr": info["name_kr"],
