@@ -43,5 +43,5 @@ API_KEY=<임의의 긴 문자열> uvicorn api:app --app-dir scripts --host 127.0
 ```
 
 - `API_KEY`를 설정하면 `/diagnose`가 `X-API-Key` 헤더를 요구한다 (없거나 틀리면 401). `/health`는 인증 없이 열려 있다. `GET /ping`은 키를 검사하고 `{"status":"ok"}`를 돌려줘서, 호출하는 쪽이 키가 맞는지 확인하는 데 쓴다.
-- 배포된 백엔드가 호출해야 하면 터널로 연다: `cloudflared tunnel --url http://127.0.0.1:8000` — 출력되는 `https://….trycloudflare.com` 주소가 백엔드의 `AI_SERVICE_URL`이 된다.
+- 배포된 백엔드가 호출해야 하면 Tailscale Funnel로 연다: `tailscale funnel --bg 8000` — 출력되는 `https://<PC이름>.<tailnet>.ts.net` 주소가 백엔드의 `AI_SERVICE_URL`이 된다. 재부팅해도 주소가 바뀌지 않는다. 공개 주소이므로 `API_KEY`를 반드시 설정한다.
 - 계정 없는 퀵 터널은 재시작할 때마다 주소가 바뀌고 가동을 보장하지 않는다. 터널을 열 때는 반드시 `API_KEY`를 설정한다.
