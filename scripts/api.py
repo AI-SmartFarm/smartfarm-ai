@@ -48,6 +48,12 @@ def health():
     return {"status": "ok"}
 
 
+@app.get("/ping", dependencies=[Depends(require_api_key)])
+def ping():
+    """Like /health but behind the API key, so a caller can confirm its key is accepted."""
+    return {"status": "ok"}
+
+
 @app.post("/diagnose", dependencies=[Depends(require_api_key)])
 async def diagnose(
     image: UploadFile = File(...),
