@@ -6,14 +6,31 @@ Run:
 
 Backend side: POST multipart/form-data to /diagnose with an `image` file part and a `crop` field
 (one of pepper/strawberry/lettuce/cucumber/tomato); response body is the same JSON full_pipeline.py prints.
+
+Auth: set the API_KEY environment variable to require it in an `X-API-Key` header on /diagnose. Do this
+whenever the server is reachable from outside the local machine (e.g. through a tunnel); /health stays open.
 """
 import io
+import logging
 import os
+import secrets
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, UploadFile
 from PIL import Image
 
 from diagnosis_pipeline import CROPS, DiagnosisPipeline
+
+logger = logging.getLogger("uvicorn.error")
+
+API_KEY = os.environ.get("API_KEY")
+if not API_KEY:
+    logger.warning("API_KEY is not set: /diagnose accepts unauthenticated requests. Do not expose this server.")
+
+
+def require_api_key(x_api_key: str | None = Header(default=None)):
+    if API_KEY and not (x_api_key and secrets.compare_digest(x_api_key.encode(), API_KEY.encode())):
+        raise HTTPException(status_code=401, detail="invalid or missing X-API-Key")
+
 
 app = FastAPI(title="smartfarm-ai diagnosis service")
 
@@ -31,7 +48,7 @@ def health():
     return {"status": "ok"}
 
 
-@app.post("/diagnose")
+@app.post("/diagnose", dependencies=[Depends(require_api_key)])
 async def diagnose(
     image: UploadFile = File(...),
     crop: str = Form(...),
