@@ -34,3 +34,15 @@ python scripts/full_pipeline.py --image path/to/photo.jpg --crop tomato
 - `models/severity-v2/` — 질병별 중증도 모델 9개 + 검증 결과(`_summary.json`)
 - `scripts/` — 학습(`train_rfdetr.py`), 단독 추론(`infer_rfdetr.py`), 전체 파이프라인(`full_pipeline.py`)
 - `data/disease_knowledge.json` — 질병별 원인/증상/예방·대응 지식베이스 (9개 클래스 전체 수록)
+
+## AI 서버 실행과 외부 공개
+
+```bash
+pip install -r requirements.txt
+API_KEY=<임의의 긴 문자열> uvicorn api:app --app-dir scripts --host 127.0.0.1 --port 8000
+```
+
+- `API_KEY`를 설정하면 `/diagnose`가 `X-API-Key` 헤더를 요구한다 (없거나 틀리면 401). `/health`는 인증 없이 열려 있다.
+- 배포된 백엔드가 호출해야 하면 터널로 연다: `cloudflared tunnel --url http://127.0.0.1:8000` — 출력되는 `https://….trycloudflare.com` 주소가 백엔드의 `AI_SERVICE_URL`이 된다.
+- 계정 없는 퀵 터널은 재시작할 때마다 주소가 바뀌고 가동을 보장하지 않는다. 터널을 열 때는 반드시 `API_KEY`를 설정한다.
+
