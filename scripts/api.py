@@ -42,6 +42,10 @@ pipeline = DiagnosisPipeline(
     resolution=int(os.environ.get("DETECTOR_RESOLUTION", "640")),
 )
 
+# Stored by the backend in diagnosis.model_version (VARCHAR(30)), so results can be traced to the model that made
+# them. Change it whenever DETECTOR_PATH or SEVERITY_DIR points at a different model.
+MODEL_VERSION = os.environ.get("MODEL_VERSION", "rfdetr-v5_severity-v2")
+
 
 @app.get("/health")
 def health():
@@ -67,7 +71,8 @@ async def diagnose(
     raw = await image.read()
     try:
         img = Image.open(io.BytesIO(raw))
+        img.load()  # open() only reads the header; decode now so a truncated file is a 400, not a 500 mid-inference
     except Exception:
         raise HTTPException(status_code=400, detail="uploaded file is not a readable image")
 
-    return pipeline.diagnose(img, crop, threshold=threshold, tiles=tiles)
+    return {**pipeline.diagnose(img, crop, threshold=threshold, tiles=tiles), "model_version": MODEL_VERSION}
