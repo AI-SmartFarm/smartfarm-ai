@@ -1,0 +1,5 @@
+# Tests replace model loading; no GPU or model downloads are required.
+fastapi
+httpx
+python-multipart
+pillow

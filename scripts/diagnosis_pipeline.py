@@ -21,11 +21,13 @@ SEVERITY_LOW_CONFIDENCE_THRESHOLD = 0.6
 
 
 def deduplicate(dets, iou_threshold=0.5):
-    """RF-DETR emits several queries per lesion, so the same spot is reported repeatedly."""
+    """Merge repeated queries for the same class without hiding another diagnosis."""
     kept = []
     for d in sorted(dets, key=lambda d: -d["confidence"]):
         x0, y0, x1, y1 = d["bbox"]
         for k in kept:
+            if d["class"] != k["class"]:
+                continue
             kx0, ky0, kx1, ky1 = k["bbox"]
             iw = max(0.0, min(x1, kx1) - max(x0, kx0))
             ih = max(0.0, min(y1, ky1) - max(y0, ky0))
